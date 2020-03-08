@@ -33,7 +33,12 @@ app.get('/api/v1/suggestions', (req, res) => {
       if (error) {
         console.error(error);
       }
-      res.status(200).json(results.rows)
+      const movies = results.rows.map(row => ({
+        ...row,
+        world_gross: `$${row.world_gross}`,
+        profitability: parseFloat(row.profitability),
+      }));
+      res.status(200).json(movies);
     }
   );
 });
