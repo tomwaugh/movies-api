@@ -33,6 +33,7 @@ app.get('/api/v1/suggestions', (req, res) => {
       if (error) {
         console.error(error);
       }
+      // Add back currency formatting and convert profitability from string
       const movies = results.rows.map(row => ({
         ...row,
         world_gross: `$${row.world_gross}`,
