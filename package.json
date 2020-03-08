@@ -1,0 +1,30 @@
+{
+  "name": "movies-api",
+  "version": "1.0.0",
+  "description": "Searchable and sortable movies api with express",
+  "author": "Tom Waugh <thomasjwaugh@gmail.com>",
+  "license": "MIT",
+  "main": "src/app.js",
+  "keywords": [
+    "nodejs",
+    "express"
+  ],
+  "scripts": {
+    "dev": "nodemon --exec babel-node src/app.js",
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel -d ./build ./src -s",
+    "build": "yarn run clean && yarn run build-babel",
+    "start": "yarn run build && node ./build/app.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.7",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "eslint": "^6.8.0",
+    "nodemon": "^2.0.2"
+  }
+}
