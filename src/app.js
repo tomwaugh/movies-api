@@ -6,18 +6,18 @@ const { pool } = require('../db/db_config');
 app.get('/api/v1/suggestions', (req, res) => {
   const { q, sortBy } = req.query;
 
-  if (sortBy && !['rotten', 'audience'].includes(sortBy)) {
-    res.status(400).json({ error: 'Invalid sortBy value. Valid values are \'audience\' and \'rotten\'.' }).end();
+  if (!q) {
+    res.status(400).json({ error: 'Request must include a search term' });
     return;
   }
 
-  let query = 'SELECT * FROM movies';
-  let values = [];
-
-  if (q) {
-    query += ' WHERE film ILIKE $1'; // ILIKE handles case
-    values.push(`%${q}%`);
+  if (sortBy && !['rotten', 'audience'].includes(sortBy)) {
+    res.status(400).json({ error: 'Invalid sortBy value. Valid values are \'audience\' and \'rotten\'.' });
+    return;
   }
+
+  let query = 'SELECT * FROM movies WHERE film ILIKE $1'; // ILIKE handles case
+  const values = [`%${q}%`];
 
   // node-postgres doesn't handle parameterising that well but we only need to handle 2 cases so can use ifs
   if (sortBy === 'audience') {
