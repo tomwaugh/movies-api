@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const { pool } = require('../db/db_config');
 
 app.get('/api/v1/suggestions', (req, res) => {
