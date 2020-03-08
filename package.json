@@ -11,16 +11,25 @@
   ],
   "scripts": {
     "dev": "nodemon --exec babel-node src/app.js",
+    "test": "jest",
     "clean": "rm -rf build && mkdir build",
     "build-babel": "babel -d ./build ./src -s",
     "build": "yarn run clean && yarn run build-babel",
     "start": "yarn run build && node ./build/app.js"
   },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
   "dependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.7",
     "@babel/node": "^7.8.7",
+    "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.8.7",
+    "@babel/runtime": "^7.8.7",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "fast-csv": "^4.1.1",
@@ -28,6 +37,8 @@
   },
   "devDependencies": {
     "eslint": "^6.8.0",
-    "nodemon": "^2.0.2"
+    "jest": "^25.1.0",
+    "nodemon": "^2.0.2",
+    "supertest": "^4.0.2"
   }
 }

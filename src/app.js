@@ -38,6 +38,8 @@ app.get('/api/v1/suggestions', (req, res) => {
   );
 });
 
-app.get('*', (req, res) => res.send('Invalid route. Please check the documentation for help on using this api.'));
+app.get('*', (req, res) => res.status(404).json({ error: 'Invalid route. Please check the documentation for help on using this api.' }));
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
+
+module.exports = app;
